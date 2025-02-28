@@ -40,6 +40,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // Register Middleware
-app.UseMiddleware<RequestTimingMiddleware>(); 
+app.UseMiddleware<RequestTimingMiddleware>();
+
+// Add custom exception handling middleware
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.Run();

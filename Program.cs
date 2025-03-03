@@ -15,6 +15,12 @@ builder.Services.AddDbContext<EmployeeDbContext>(options =>
 
 builder.Services.AddSwaggerGen();
 
+/// Added Custom exception filter
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<CustomExceptionFilter>();
+});
+
 // Build the application (finalizes the configuration)
 var app = builder.Build();
 
@@ -39,10 +45,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Register Middleware
-app.UseMiddleware<RequestTimingMiddleware>();
-
 // Add custom exception handling middleware
 app.UseMiddleware<ExceptionMiddleware>();
+
+// Register Middleware
+//app.UseMiddleware<RequestTimingMiddleware>();
 
 app.Run();

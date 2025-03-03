@@ -1,4 +1,5 @@
-﻿using EmployeeManagementCore.Models;
+﻿using EmployeeManagementCore.Middleware;
+using EmployeeManagementCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -6,8 +7,9 @@ using System.Linq;
 
 namespace EmployeeManagementCore.Controllers.API
 {
-    [Route("api/[controller]")]
+    //[ServiceFilter(typeof(CustomExceptionFilter))]
     [ApiController]
+    [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {
         private readonly EmployeeDbContext _context;
@@ -17,6 +19,7 @@ namespace EmployeeManagementCore.Controllers.API
         }
         // GET: http://localhost:5079/api/employee
         [HttpGet]
+        //[ServiceFilter(typeof(CustomExceptionFilter))]
         public List<EmployeeModel> Get()
         {
             return _context.Employee.ToList();
